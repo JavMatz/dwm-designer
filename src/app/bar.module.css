@@ -1,0 +1,65 @@
+/* --col-gray1: #222222; */
+/* --col-gray2: #444444; */
+/* --col-gray3: #bbbbbb; */
+/* --col-gray4: #eeeeee; */
+/* --col-cyan : #005577; */
+
+.topbar {
+    width: 100%;
+    font-family: monospace;
+    background-color: #222222;
+    color: #bbbbbb;
+    display: flex;
+}
+
+.topbar > .window_title,.status {
+    padding: 2px 5px;
+}
+
+.workspaces {
+    display: flex;
+}
+
+.selected_workspace {
+    position: relative;
+    background-color: #005577;
+    color: #eeeeee;
+    width: 100%;
+    padding: 2px 8px;
+    flex: 1;
+}
+
+.unselected_workspace {
+    position: relative;
+    padding: 2px 8px;
+}
+
+.selected_rectangle {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 4px;
+    height: 4px;
+    background-color: #eeeeee;
+}
+
+.unselected_rectangle {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 3px;
+    height: 3px;
+    border: 1px solid;
+    border-color: #bbbbbb;
+}
+
+.layout_indicator {
+    padding: 2px 8px;
+}
+
+.window_title {
+    flex: 2;
+    background-color: #005577;
+    color: #eeeeee;
+    vertical-align: middle;
+}

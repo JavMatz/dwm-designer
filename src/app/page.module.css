@@ -1,3 +1,12 @@
+.screen {
+    /* background-image: url("ina_color.jpg"); */
+    width: 65%;
+    background-color: #808080;
+    background-position: center;
+    background-size: cover;
+    aspect-ratio: 16 / 9;
+}
+
 .main {
   display: flex;
   flex-direction: column;
