@@ -1,18 +1,12 @@
-/* --col-gray1: #222222; */
-/* --col-gray2: #444444; */
-/* --col-gray3: #bbbbbb; */
-/* --col-gray4: #eeeeee; */
-/* --col-cyan : #005577; */
+/* .topbar { */
+/*     width: 100%; */
+/*     font-family: monospace; */
+/*     /1* background-color: #222222; *1/ */
+/*     /1* color: #bbbbbb; *1/ */
+/*     display: flex; */
+/* } */
 
-.topbar {
-    width: 100%;
-    font-family: monospace;
-    background-color: #222222;
-    color: #bbbbbb;
-    display: flex;
-}
-
-.topbar > .window_title,.status {
+.window_title,.status {
     padding: 2px 5px;
 }
 

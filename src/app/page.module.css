@@ -1,19 +1,30 @@
-.screen {
-    /* background-image: url("ina_color.jpg"); */
-    width: 65%;
-    background-color: #808080;
-    background-position: center;
-    background-size: cover;
-    aspect-ratio: 16 / 9;
-}
-
 .main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 2rem;
+  /* min-height: 100vh; */
+}
+
+.colorControlGrid {
+    display: grid;
+    padding: 1rem;
+    margin: 2rem;
+    border: 1px solid white;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+}
+
+.colorControlItem {
+    color: white;
+    place-self: center;
+    margin: 10px;
+}
+
+.input {
+    width: 70%;
+    background-color: red;
 }
 
 .description {
