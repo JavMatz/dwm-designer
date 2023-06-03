@@ -1,0 +1,14 @@
+.colorControlGrid {
+    display: grid;
+    padding: 1rem;
+    margin: 2rem;
+    border: 1px solid white;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+}
+
+.colorControlItem {
+    color: white;
+    place-self: center;
+    margin: 10px;
+}

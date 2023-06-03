@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border: 2px solid green;
+  /* background-color: #808080; */
+  /* min-height: 100vh; */
+}
+
+.controlPanel {
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
