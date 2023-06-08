@@ -16,6 +16,13 @@ export default function App() {
 
 	const [useExtraBorderColor, setUseExtraBorderColor] = useState(false);
 
+	const [barProperties, setBarProperties] = useState({
+		show: true,
+		top: true,
+		workspaces: ["1","2","3","4","5","6","7","8","9",]
+
+	});
+
 	// Color control
 	function onChangedColor(event) {
 		if (useExtraBorderColor) {
@@ -34,10 +41,14 @@ export default function App() {
 		setUseExtraBorderColor(prevState => !prevState);
 	}
 
-	const [barProperties, setBarProperties] = useState({
-		show: true,
-		top: true
-	});
+	function handleBarPropertyChange(event) {
+		console.log(event.target.name)
+		if (event.target.name === "show") {
+			setBarProperties(prevState => ({ ...prevState, show: !prevState.show }));
+		} else {
+			setBarProperties(prevState => ({ ...prevState, top: !prevState.top }));
+		}
+	}
 
 	return (
 		<div className="main">
@@ -45,6 +56,7 @@ export default function App() {
 				<div className="colorControlGrid">
 					<ColorControl extraBorderToggle={handleExtraBorderColorToggle} extraBorder={useExtraBorderColor} colorChangeHandler={onChangedColor} colors={colors} />
 				</div>
+				<BarControl propHandler={handleBarPropertyChange} barProperties={barProperties} />
 			</div>
 			<Screen colors={colors} barProps={barProperties} />
 		</div>

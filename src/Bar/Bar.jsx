@@ -24,8 +24,6 @@ const windowTitle = {
     padding: '2px 5px',
 };
 
-const workspaces = [...Array(9).keys()];
-
 function SelectedRectangle() {
     return <div className="selected_rectangle"></div>
 }
@@ -34,36 +32,36 @@ function UnselectedRectangle() {
     return <div className="unselected_rectangle"></div>
 }
 
-export default function Bar({ colors }) {
+export default function Bar({ colors, workspaces }) {
     return (
         <div style={{ ...topBar, color: colors.colGray3, backgroundColor: colors.colGray1 }}>
             <div className="workspaces">
                 {
-                    workspaces.map((workspace, index) => {
+                    workspaces.map((tag, index) => {
 
-                        if (workspace + 1 == 1) {
+                        if (tag == 1) {
                             return (
-                                <div key={index} id={workspace + 1} style={{ ...selectedWorkspace, color: colors.colGray4, backgroundColor: colors.colCyan }} >
-                                    <SelectedRectangle />{workspace + 1}
+                                <div key={index} id={tag} style={{ ...selectedWorkspace, color: colors.colGray4, backgroundColor: colors.colCyan }} >
+                                    <SelectedRectangle />{tag}
                                 </div>
                             )
                             // 8 & 5 are random values, nothing special
-                        } else if (workspace + 1 == 8) {
+                        } else if (tag == 8) {
                             return (
-                                <div key={index} id={workspace + 1} style={{ ...unselectedWorkspace }}>
-                                    <UnselectedRectangle />{workspace + 1}
+                                <div key={index} id={tag} style={{ ...unselectedWorkspace }}>
+                                    <UnselectedRectangle />{tag}
                                 </div>
                             )
-                        } else if (workspace + 1 == 5) {
+                        } else if (tag == 5) {
                             return (
-                                <div key={index} id={workspace + 1} style={{ ...selectedWorkspace, color: colors.colGray4, backgroundColor: colors.colCyan }}>
-                                    {workspace + 1}
+                                <div key={index} id={tag} style={{ ...selectedWorkspace, color: colors.colGray4, backgroundColor: colors.colCyan }}>
+                                    {tag}
                                 </div>
                             )
                         }
                         return (
                             <div key={index} style={{ ...unselectedWorkspace }}>
-                                {workspace + 1}
+                                {tag}
                             </div>
                         )
                     })

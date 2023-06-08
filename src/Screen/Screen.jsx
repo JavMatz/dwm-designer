@@ -21,7 +21,7 @@ export default function Screen({ colors, barProps }) {
 	return (
 		<div style={{ ...screenStyle, flexDirection: barProps.top ? "column" : "column-reverse" }}>
 			{
-				barProps.show ? <Bar colors={colors} /> : <></>
+				barProps.show ? <Bar colors={colors} workspaces={barProps.workspaces}/> : <></>
 			}
 			<div style={{ ...dummyWindow, border: `2px solid ${colors["colBorder"]}` }}> user@host:/home</div>
 		</div>
