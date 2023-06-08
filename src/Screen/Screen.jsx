@@ -22,19 +22,51 @@ const dummyWindow = {
 }
 
 export default function Screen({ colors, barProps, windowProps }) {
+
+	function Tiled() {
+		return (
+			<>
+				<div className="masterArea">
+					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em', border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
+				</div>
+				<div className="stackArea">
+					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em', border: `${windowProps.borderSize}px solid ${colors["colGray2"]}` }}> user@host:/home</div>
+					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em', border: `${windowProps.borderSize}px solid ${colors["colGray2"]}` }}> user@host:/home</div>
+				</div>
+			</>
+		)
+	}
+
+	function SingleFloating() {
+		return (
+			<>
+				<div style={{ ...dummyWindow, height: "60%", margin: '2em', border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
+			</>
+		)
+	}
+
+	function renderSwitch(layout) {
+		switch (layout) {
+			case 'Tiled':
+				return <Tiled />
+			case 'Floating':
+				return <SingleFloating />
+			case 'Empty':
+				return <></>
+			default:
+				return <></>
+		}
+	}
+
 	return (
 		<div style={{ ...screenStyle, flexDirection: barProps.top ? "column" : "column-reverse" }}>
 			{
 				barProps.show ? <Bar colors={colors} workspaces={barProps.workspaces} /> : <></>
 			}
 			<div className="windowGrid">
-				<div className="masterArea">
-					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em',  border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
-				</div>
-				<div className="stackArea">
-					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em',border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
-					<div style={{ ...dummyWindow, margin: windowProps.gaps ? '1em' : '0em',border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
-				</div>
+				{
+					renderSwitch(windowProps.layout)
+				}
 			</div>
 		</div>
 	)

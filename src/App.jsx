@@ -26,6 +26,7 @@ export default function App() {
 	const [windowProperties, setWindowProperties] = useState({
 		borderSize: 1,
 		gaps: false,
+		layout: "Tiled"
 	});
 
 	// Color control
@@ -34,7 +35,7 @@ export default function App() {
 			setColors(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
 		} else {
 			if (event.target.name === "colCyan") {
-				setColors(prevState => ({ ...prevState, [event.target.name]: event.target.value, extraColBorder: event.target.value }));
+				setColors(prevState => ({ ...prevState, [event.target.name]: event.target.value, colBorder: event.target.value }));
 			} else {
 				setColors(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
 			}
@@ -57,6 +58,8 @@ export default function App() {
 	function handleWindowPropertyChange(event) {
 		if (event.target.name === "gaps") {
 			setWindowProperties(prevState => ({ ...prevState, gaps: !prevState.gaps }));
+		} else if (event.target.name === "windowLayout") {
+			setWindowProperties(prevState => ({ ...prevState, layout: event.target.value }))
 		} else {
 			setWindowProperties(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
 		}
@@ -71,7 +74,7 @@ export default function App() {
 				<BarControl propHandler={handleBarPropertyChange} barProperties={barProperties} />
 				<WindowControl propHandler={handleWindowPropertyChange} windowProps={windowProperties} />
 			</div>
-			<Screen colors={colors} barProps={barProperties} windowProps={windowProperties}/>
+			<Screen colors={colors} barProps={barProperties} windowProps={windowProperties} />
 		</div>
 	)
 }

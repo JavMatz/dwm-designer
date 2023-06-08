@@ -5,7 +5,7 @@ import isValidHexColor from '../lib/isValidHexColor.js';
 import './ColorControl.css';
 
 const colorItem = {
-	width: "10vw",
+	width: "100%",
 	height: "5em",
 	placeSelf: "center",
 	justifyContent: "space-between",
