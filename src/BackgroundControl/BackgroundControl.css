@@ -1,0 +1,13 @@
+.backgroundControlFlex {
+    display: flex;
+	flex-wrap: wrap;
+    padding: 1rem;
+    margin: 2rem;
+    border: 1px solid red;
+}
+
+.backgroundControlItem {
+    place-self: start;
+    margin: 10px;
+	max-height: 1em;
+}

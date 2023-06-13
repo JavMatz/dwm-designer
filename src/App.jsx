@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ColorControl from './ColorControl';
 import BarControl from './BarControl';
+import BackgroundControl from './BackgroundControl';
 import WindowControl from './WindowControl';
 import Screen from './Screen';
 import './App.css';
@@ -28,6 +29,12 @@ export default function App() {
 		gaps: false,
 		layout: "Tiled"
 	});
+
+	const [backgroundProperties, setBackgroundProperties] = useState({
+		useColor: true,
+		color: '#808080',
+		imagePath: null
+	})
 
 	// Color control
 	function onChangedColor(event) {
@@ -65,16 +72,27 @@ export default function App() {
 		}
 	}
 
+	function handleBackgroundPropertyChange(event) {
+		if (event.target.name === "useColor") {
+			setBackgroundProperties(prevState => ({ ...prevState, useColor: !prevState.useColor }));
+		} else if(event.target.name === "color") {
+			setBackgroundProperties(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+		} else {
+			setBackgroundProperties(prevState => ({ ...prevState, imagePath: event.target.files[0]}))
+		}
+	}
+
 	return (
 		<div className="main">
 			<div className="controlPanel">
+				<BackgroundControl propHandler={handleBackgroundPropertyChange} backgroundProps={backgroundProperties} />
 				<div className="colorControlGrid">
 					<ColorControl extraBorderToggle={handleExtraBorderColorToggle} extraBorder={useExtraBorderColor} colorChangeHandler={onChangedColor} colors={colors} />
 				</div>
 				<BarControl propHandler={handleBarPropertyChange} barProperties={barProperties} />
 				<WindowControl propHandler={handleWindowPropertyChange} windowProps={windowProperties} />
 			</div>
-			<Screen colors={colors} barProps={barProperties} windowProps={windowProperties} />
+			<Screen colors={colors} barProps={barProperties} windowProps={windowProperties} backgroundProps={backgroundProperties} />
 		</div>
 	)
 }
