@@ -56,12 +56,22 @@ export default function Screen({ colors, barProps, windowProps, backgroundProps 
 		)
 	}
 
+	function SingleTiled() {
+		return (
+			<>
+				<div style={{ ...dummyWindow, height: "auto", gridColumnStart: '1', gridColumnEnd: 'span 2', margin: windowProps.gaps ? '1em' : '0em', border: `${windowProps.borderSize}px solid ${colors["colBorder"]}` }}> user@host:/home</div>
+			</>
+		)
+	}
+
 	function renderSwitch(layout) {
 		switch (layout) {
 			case 'Tiled':
 				return <Tiled />
 			case 'Floating':
 				return <SingleFloating />
+			case 'Single tiled':
+				return <SingleTiled />
 			case 'Empty':
 				return <></>
 			default:
