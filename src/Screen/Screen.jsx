@@ -28,7 +28,7 @@ export default function Screen({ colors, barProps, windowProps, backgroundProps 
 		flexDirection: barProps.top ? "column" : "column-reverse",
 		justifyContent: "space-between",
 		width: "50%",
-		backgroundImage: backgroundProps.imagePath ? `url(${URL.createObjectURL(backgroundProps.imagePath)})` : `url(https://th.bing.com/th/id/OIP.Tq7bk1q1RlzEL1k-oo1a2wHaE0?w=250&h=180&c=7&r=0&o=5&pid=1.7)`,
+		backgroundImage: backgroundProps.imagePath ? `url(${URL.createObjectURL(backgroundProps.imagePath)})` : `url(../../public/wallpaper.png)`,
 		backgroundPosition: 'center',
 		backgroundSize: 'cover',
 		aspectRatio: "16 / 9",

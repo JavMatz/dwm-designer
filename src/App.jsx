@@ -33,7 +33,7 @@ export default function App() {
 	const [backgroundProperties, setBackgroundProperties] = useState({
 		useColor: true,
 		color: '#808080',
-		imagePath: null
+		imagePath: null,
 	})
 
 	// Color control
@@ -75,10 +75,10 @@ export default function App() {
 	function handleBackgroundPropertyChange(event) {
 		if (event.target.name === "useColor") {
 			setBackgroundProperties(prevState => ({ ...prevState, useColor: !prevState.useColor }));
-		} else if(event.target.name === "color") {
+		} else if (event.target.name === "color") {
 			setBackgroundProperties(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
 		} else {
-			setBackgroundProperties(prevState => ({ ...prevState, imagePath: event.target.files[0]}))
+			setBackgroundProperties(prevState => ({ ...prevState, imagePath: event.target.files[0] }))
 		}
 	}
 
