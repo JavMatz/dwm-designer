@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Bar from './Bar';
 import ColorControl from './ColorControl';
 import BarControl from './BarControl';
 import BackgroundControl from './BackgroundControl';
@@ -82,17 +83,33 @@ export default function App() {
 		}
 	}
 
+	const main = {
+		background: "#808080",
+		height: "100%",
+		display: "flex",
+		flexFlow: "column",
+		justifyContent: "flex-start",
+		alignItems: "flex-start",
+	};
+
+	const controlPanel = {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		backgroundColor: "white",
+	};
+
 	return (
-		<div className="main">
-			<div className="controlPanel">
-				<BackgroundControl propHandler={handleBackgroundPropertyChange} backgroundProps={backgroundProperties} />
-				<div className="colorControlGrid">
-					<ColorControl extraBorderToggle={handleExtraBorderColorToggle} extraBorder={useExtraBorderColor} colorChangeHandler={onChangedColor} colors={colors} />
+		<div style={main}>
+			<Bar colors={colors} workspaces={barProperties.workspaces} />
+			<div className="windowFlex">
+				<div style={controlPanel}>
+					Foo
 				</div>
-				<BarControl propHandler={handleBarPropertyChange} barProperties={barProperties} />
-				<WindowControl propHandler={handleWindowPropertyChange} windowProps={windowProperties} />
+				<div style={controlPanel}>
+					Bar
+				</div>
 			</div>
-			<Screen colors={colors} barProps={barProperties} windowProps={windowProperties} backgroundProps={backgroundProperties} />
 		</div>
 	)
 }
