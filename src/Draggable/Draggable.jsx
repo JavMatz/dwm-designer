@@ -1,19 +1,18 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Draggable({ children, initialX = 0, initialY = 0, }) {
-	const boxRef = useRef(0);
+export default function Draggable({ children, style = {}, initialX = 0, initialY = 0, width = "auto", heigth = "auto" }) {
 
 	const [dragInfo, setDragInfo] = useState({
 		position: {
 			x: initialX,
 			y: initialY
 		},
-		draggin: false,
+		isDraggin: false,
 		rel: null
 	});
 
 	useEffect(() => {
-		if (dragInfo.draggin) {
+		if (dragInfo.isDraggin) {
 			document.addEventListener('mousemove', onMouseMove)
 			document.addEventListener('mouseup', onMouseUp)
 		}
@@ -21,57 +20,47 @@ export default function Draggable({ children, initialX = 0, initialY = 0, }) {
 			document.removeEventListener('mousemove', onMouseMove)
 			document.removeEventListener('mouseup', onMouseUp)
 		}
-	}, [dragInfo.draggin]);
-
-	function getPosition() {
-		const x = boxRef.current.offsetLeft;
-		const y = boxRef.current.offsetTop;
-
-		return { xcoord: x, ycoord: y }
-	}
+	}, [dragInfo.isDraggin]);
 
 	function onMouseDown(event) {
 		if (event.button !== 0) return
-		let pos = getPosition();
 		setDragInfo(prevState => ({
 			...prevState,
-			draggin: true,
-			rel: {
-				x: event.pageX - pos.xcoord,
-				y: event.pageY - pos.ycoord
-			}
+			isDraggin: true,
 		}));
 		event.stopPropagation()
 		event.preventDefault()
 	}
 
 	function onMouseUp(event) {
-		setDragInfo(prevState => ({ ...prevState, draggin: false }));
+		setDragInfo(prevState => ({ ...prevState, isDraggin: false }));
 		event.stopPropagation()
 		event.preventDefault()
 	}
 
 	function onMouseMove(event) {
-		if (!dragInfo.draggin) return
+		if (!dragInfo.isDraggin) return
 		setDragInfo(prevState => ({
 			...prevState,
 			position: {
-				x: event.pageX - prevState.rel.x,
-				y: event.pageY - prevState.rel.y
+				x: prevState.position.x + event.movementX,
+				y: prevState.position.y + event.movementY
 			}
 		}));
 		event.stopPropagation()
 		event.preventDefault()
 	}
 
-	const draggable = {
+	const dimensions = {
 		position: "absolute",
 		left: `${dragInfo.position.x}px`,
 		top: `${dragInfo.position.y}px`,
+		width: `${heigth}`,
+		heigth: `${width}`,
 	}
 
 	return (
-		<div ref={boxRef} style={draggable} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}>
+		<div id="draggable" style={{ ...dimensions, ...style }} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}>
 			{children}
 		</div>
 	)
