@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Bar from './Bar';
+import Draggable from './Draggable/';
 import ColorControl from './ColorControl';
 import BarControl from './BarControl';
 import BackgroundControl from './BackgroundControl';
 import WindowControl from './WindowControl';
 import Screen from './Screen';
+import getLuminance from './lib/getLuminance.js';
+import isValidHexColor from './lib/isValidHexColor.js';
 import './App.css';
 
 export default function App() {
@@ -83,26 +86,44 @@ export default function App() {
 		}
 	}
 
-	const main = {
-		background: "#808080",
-		height: "100%",
-		display: "flex",
-		flexFlow: "column",
-		justifyContent: "flex-start",
-		alignItems: "flex-start",
+	const background = {
+		background: backgroundProperties.color,
 	};
 
-	const controlPanel = {
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		backgroundColor: "white",
+	const border = {
+		border: `${windowProperties.borderSize}px solid ${colors.colCyan}`
 	};
+
+	const inputStyle = {
+		fontSize: "1em",
+		width: "90%",
+		backgroundColor: isValidHexColor(backgroundProperties.color) ? backgroundProperties.color : "black",
+		border: "none",
+		outline: "none",
+		color: getLuminance(backgroundProperties.color) > 128 ? "black" : "white"
+	}
+
+	const draggableStyle = {
+		background: "#f0f0f0",
+		padding: "10px",
+		borderRadius: "1em",
+		width: "8em",
+		height: "10em"
+	}
 
 	return (
-		<div style={main}>
-			<Bar colors={colors} workspaces={barProperties.workspaces} />
-			<div className="windowFlex">
+		<div className="main" style={
+			{
+				...background,
+				flexDirection: barProperties.top ? "column" : "column-reverse"
+			}
+		}>
+			{
+				barProperties.show
+					? <Bar colors={colors} workspaces={barProperties.workspaces} />
+					: <></>
+			}
+			<div className="windowGrid">
 				<div style={controlPanel}>
 					Foo
 				</div>

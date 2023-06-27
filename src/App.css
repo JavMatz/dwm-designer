@@ -1,24 +1,51 @@
-/* .main { */
-/* 	background: #808080; */
-/* 	height: 100%; */
-/* 	display: flex; */
-/* 	flex-direction: column; */
-/* 	justify-content: flex-start; */
-/* 	align-items: flex-start; */
-/* } */
-
-.controlPanel {
+.main {
+	height: 100%;
+	font-family: sans;
+	font-size: 1em;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: white;
+	justify-content: flex-start;
+	align-items: stretch;
 }
 
-.windowFlex {
-	height: 100%;
-	width: 100%;
+.windowGrid {
+	flex-grow: 2;
+	display: grid;
+	grid-template-columns: 55% 45%;
+	grid-template-rows: 100%;
+}
+
+.controlPanel {
+	padding: 2em;
+	margin: 11em;
+	justify-items: center;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	flex-wrap: wrap;
 	justify-content: space-evenly;
-	align-items: center;
+	align-items: stretch;
+}
+
+#light-panel {
+	background-color: #f6f5f4;
+}
+
+#dark-panel{
+	background-color: #353535;
+}
+
+.controlSection {
+	border-radius: 5px;
+	padding: 1em;
+	margin: 0.5em;
+}
+
+#light-section {
+	background-color: white;
+	box-shadow: 0.1em 0.1em #77767b;
+}
+
+#dark-section {
+	color: #f6f5f4;
+	background-color: #535353;
+	box-shadow: 0.1em 0.1em #241f32;
 }

@@ -1,7 +1,9 @@
 import './Bar.css';
 
-const topBar = {
+const bar = {
 	width: '100%',
+	height: '14pt',
+	fontSize: '10pt',
 	fontFamily: 'monospace',
 	display: 'flex',
 };
@@ -51,7 +53,7 @@ export default function Bar({ colors, workspaces }) {
 	}
 
 	return (
-		<div style={{ ...topBar, color: colors.colGray3, backgroundColor: colors.colGray1 }}>
+		<div style={{ ...bar, color: colors.colGray3, backgroundColor: colors.colGray1 }}>
 			<div className="workspaces">
 				{
 					workspaces.map((tag, index) => {
