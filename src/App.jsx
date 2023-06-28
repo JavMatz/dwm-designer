@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import Bar from './Bar';
 import ControlWindow from './ControlWindow/'
-import ControlElement from './ControlElement/'
-import Draggable from './Draggable/';
-import ColorControl from './ColorControl';
-import BarControl from './BarControl';
-import BackgroundControl from './BackgroundControl';
-import WindowControl from './WindowControl';
-import Screen from './Screen';
+import ControlElementContainer from './ControlElementContainer/'
 import getLuminance from './lib/getLuminance.js';
 import isValidHexColor from './lib/isValidHexColor.js';
 import './App.css';
@@ -88,9 +82,16 @@ export default function App() {
 		}
 	}
 
-	const background = {
-		background: backgroundProperties.color,
-	};
+	const background = backgroundProperties.useColor
+		? { background: backgroundProperties.color }
+		: {
+			backgroundImage: backgroundProperties.imagePath
+				? `url(${URL.createObjectURL(backgroundProperties.imagePath)})`
+				: `url(../../public/wallpaper.png)`,
+			backgroundPosition: "center",
+			backgroundRepeat: "no-repeat",
+			backgroundSize: "cover"
+		};
 
 	const border = {
 		border: `${windowProperties.borderSize}px solid ${colors.colCyan}`
@@ -113,7 +114,7 @@ export default function App() {
 		height: "10em"
 	}
 
-	const windowStyle = {
+	const controlWindowStyle = {
 		...border,
 		justifySelf: "center",
 		alignSelf: "center",
@@ -132,14 +133,29 @@ export default function App() {
 					: <></>
 			}
 			<div className="windowGrid">
-				<div style={windowStyle}>
-					Foo
-				</div>
-				<ControlWindow light={true} style={windowStyle}>
-					<ControlElement light={true}>
+				<ControlWindow light={false} style={controlWindowStyle}>
+					<ControlElementContainer>
+						Color controls
+					</ControlElementContainer>
+				</ControlWindow>
+				<ControlWindow light={true} style={controlWindowStyle}>
+					<ControlElementContainer light={true}>
 						Show bar <input name="show" checked={barProperties.show} onChange={handleBarPropertyChange} type="checkbox" />
 						Bar on top <input name="top" checked={barProperties.top} onChange={handleBarPropertyChange} type="checkbox" />
-					</ControlElement>
+					</ControlElementContainer>
+					<ControlElementContainer light={true}>
+						Use color as background
+						<input name="useColor" checked={backgroundProperties.useColor} onChange={handleBackgroundPropertyChange} type="checkbox" />
+						{
+							backgroundProperties.useColor
+								? <div className="backgroundControlItem">
+									<input name="color" value={backgroundProperties.color} onChange={handleBackgroundPropertyChange} style={inputStyle} maxLength="7" type="text" />
+								</div>
+								: <div className="backgroundControlItem">
+									<input name="backgroundImage" id="backgroundImage" onChange={handleBackgroundPropertyChange} value="" accept="image/*" type="file" multiple={false} />
+								</div>
+						}
+					</ControlElementContainer>
 				</ControlWindow>
 			</div>
 		</div>
