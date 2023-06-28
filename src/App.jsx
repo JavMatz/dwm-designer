@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Bar from './Bar';
+import ControlWindow from './ControlWindow/'
+import ControlElement from './ControlElement/'
 import Draggable from './Draggable/';
 import ColorControl from './ColorControl';
 import BarControl from './BarControl';
@@ -111,6 +113,12 @@ export default function App() {
 		height: "10em"
 	}
 
+	const windowStyle = {
+		...border,
+		justifySelf: "center",
+		alignSelf: "center",
+	}
+
 	return (
 		<div className="main" style={
 			{
@@ -124,12 +132,15 @@ export default function App() {
 					: <></>
 			}
 			<div className="windowGrid">
-				<div style={controlPanel}>
+				<div style={windowStyle}>
 					Foo
 				</div>
-				<div style={controlPanel}>
-					Bar
-				</div>
+				<ControlWindow light={true} style={windowStyle}>
+					<ControlElement light={true}>
+						Show bar <input name="show" checked={barProperties.show} onChange={handleBarPropertyChange} type="checkbox" />
+						Bar on top <input name="top" checked={barProperties.top} onChange={handleBarPropertyChange} type="checkbox" />
+					</ControlElement>
+				</ControlWindow>
 			</div>
 		</div>
 	)
